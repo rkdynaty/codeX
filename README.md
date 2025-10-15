@@ -55,3 +55,7 @@ To verify the script locally, run the following commands:
    ```
 
 These commands should complete without errors, producing console summaries and, when `--export` is provided, a CSV file containing the computed indicators.
+
+### Resolving merge conflicts for PR #3
+
+If you run into a merge conflict in `scripts/analyze_stock.py` while trying to integrate [PR #3](https://github.com/rkdynaty/codeX/pull/3), follow the step-by-step instructions in [`docs/merge_pr3_conflict.md`](docs/merge_pr3_conflict.md). The guide covers fetching the pull request locally, merging it into your branch, choosing between the conflicting versions, and finishing the merge safely.
