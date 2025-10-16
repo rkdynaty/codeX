@@ -1,57 +1,48 @@
-# codeX
+# CodeX Stock Analysis CLI
 
-Project to try out OpenAI codeX
+A lightweight command-line tool for downloading, enriching, and summarising historical stock prices using only the Python standard library. The CLI can operate online via Yahoo Finance or offline with a local CSV that follows Yahoo's export format.
 
-## Stock Analysis CLI
+## Requirements
+- Python 3.9 or newer.
+- Optional: internet access for live downloads. The script also works offline when you supply a local dataset.
 
-This repository includes a command-line interface (CLI) at `scripts/analyze_stock.py` that downloads and analyzes historical stock data from Yahoo Finance using only the Python standard library.
-
-### Requirements
-
-- Python 3.9 or newer (the standard library modules used are available on Python 3.9+)
-- Internet access is optional; you can provide a local Yahoo Finance-formatted CSV file when running offline.
-
-### Usage
-
-Display the available options:
-
-```bash
-python scripts/analyze_stock.py --help
-```
-
-Download the latest year of Apple (AAPL) data, compute the default moving averages (20, 50, 200 days), and print the summary report:
+## Quick Start
+Run the CLI with a ticker symbol to fetch the last year of daily prices and print a summary:
 
 ```bash
 python scripts/analyze_stock.py AAPL
 ```
 
-Analyze an offline dataset using the bundled sample file (`data/sample_aapl.csv`) and customize the moving-average windows:
+View the built-in help for all options:
+
+```bash
+python scripts/analyze_stock.py --help
+```
+
+## Working Offline
+A sample Yahoo Finance export (`data/sample_aapl.csv`) is bundled for offline experiments. Combine it with custom moving-average windows:
 
 ```bash
 python scripts/analyze_stock.py AAPL --data-file data/sample_aapl.csv --moving-averages 5 10 20
 ```
 
-Export the enriched dataset to a CSV file after computing indicators:
+## Exporting Results
+Include the `--export` flag to write the enriched dataset (with moving averages and daily returns) to a CSV file:
 
 ```bash
 python scripts/analyze_stock.py TSLA --start 2023-01-01 --export data/tsla_analysis.csv
 ```
 
-### Testing the Script
+## Features
+- Downloads daily OHLC data from Yahoo Finance with configurable start and end dates.
+- Computes daily returns, multiple moving averages, and summary statistics such as cumulative return and annualised volatility.
+- Supports offline analysis by ingesting local CSV files.
+- Exports augmented datasets for further analysis in spreadsheets or notebooks.
 
-To verify the script locally, run the following commands:
+## Suggested Local Checks
+To verify the CLI in your environment:
+1. Display the help text: `python scripts/analyze_stock.py --help`
+2. Run against the sample offline dataset: `python scripts/analyze_stock.py AAPL --data-file data/sample_aapl.csv`
+3. (Optional) Fetch live data if you have network access: `python scripts/analyze_stock.py MSFT --start 2023-01-01`
 
-1. Show the CLI help text to ensure the script runs:
-   ```bash
-   python scripts/analyze_stock.py --help
-   ```
-2. Execute the CLI against the bundled sample data to confirm offline analysis works:
-   ```bash
-   python scripts/analyze_stock.py AAPL --data-file data/sample_aapl.csv --moving-averages 5 10
-   ```
-3. (Optional) Run the CLI against live Yahoo Finance data if you have network access:
-   ```bash
-   python scripts/analyze_stock.py MSFT --start 2023-01-01
-   ```
-
-These commands should complete without errors, producing console summaries and, when `--export` is provided, a CSV file containing the computed indicators.
+These commands should complete without errors, printing a summary to the console and generating any requested export files.
